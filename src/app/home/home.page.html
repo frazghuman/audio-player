@@ -1,20 +1,79 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-content>
+  <div class="page-container">
+    <div>
+      <div class="header">
+        <div>
+          <!-- <img src="../../assets/icon/back.svg" /> -->
+        </div>
+        <div>Playing Now</div>
+        <div></div>
+      </div>
+      <swiper-container>
+        @for (song of songsPlayList; track $index) {
+          <swiper-slide>
+            <div class="slide">
+              <div class="img-container">
+                <img [src]="'assets/'+song.poster" />
+              </div>
+              <div class="title">{{song.name}}</div>
+              <div class="artist">{{song.singer}}</div>
+            </div>
+          </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+    <div>
+      <div class="controls">
+        <div class="left">
+          <ion-button class="custom-icon-button">
+            <img src="assets/icon/volume.svg" />
+          </ion-button>
+        </div>
+        <div class="right">
+          <div style="margin-right: 20px;">
+            <ion-button class="custom-icon-button">
+              <img src="assets/icon/ic_round-repeat.svg" />
+            </ion-button>
+          </div>
+          <div>
+            <ion-button class="custom-icon-button">
+              <img src="assets/icon/shuffle.svg" />
+            </ion-button>
+          </div>
+        </div>
+      </div>
+      <div class="track-time">
+        <div>00:00</div>
+        <div>05:00</div>
+      </div>
+      <div class="range">
+        <audio #audioPlayer src="path/to/your/audiofile.mp3" (loadedmetadata)="initAudioPlayer()"></audio>
+        <ion-range #audioSlider
+            class="custom-range"
+             min="0"
+             [max]="duration"
+             step="0.1"
+             [(ngModel)]="position"
+             (ionChange)="seekAudio()">
+        </ion-range>
+      </div>
+      <div class="player-controls">
+        <div>
+          <ion-button class="custom-icon-button">
+            <img src="assets/icon/prev.svg" />
+          </ion-button>
+        </div>
+        <div>
+          <ion-button class="custom-icon-button" (click)="playPauseToggle()">
+            <img [src]="'assets/icon/' + (playing ? 'pause' : 'play') + '.svg'" />
+          </ion-button>
+        </div>
+        <div>
+          <ion-button class="custom-icon-button">
+            <img src="assets/icon/next.svg" />
+          </ion-button>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>
