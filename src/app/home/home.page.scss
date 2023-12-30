@@ -90,6 +90,10 @@ swiper-container {
   height: 370px;
 }
 
+swiper-slide {
+  margin-top: 18px;
+}
+
 swiper-slide.swiper-slide-active {
   width: calc(100% - 130px) !important;
   margin-left: 30px;
